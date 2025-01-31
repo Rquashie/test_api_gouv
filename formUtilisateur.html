@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Formulaire d'adresse</title>
+</head>
+<body>
+<form action = "traitement_utilisateur.php" method = "POST">
+    <table>
+        <tr>
+            <td><label for name ="numeroRue">Numéro de rue </label></td>
+            <td><input type="number" name="numeroRue"></td>
+        </tr>
+        <tr>
+            <td><label for name ="nomRue">Nom de rue </label></td>
+            <td><input type="text" name="nomRue"></td>
+        </tr>
+        <tr>
+            <td><label for name ="ville">Ville </label></td>
+            <td><input type="text" name="ville"></td>
+        </tr>
+        <tr>
+            <td><label for name ="cp">Code Postal</label></td>
+            <td><input type="text" name="cp"></td>
+        </tr>
+        <tr>
+            <td><input type = "submit" value = "valider"></td>
+            <td><input type="reset" value="Annuler"></td>
+        </tr>
+    </table>
+</form>
+</body>
+</html>
