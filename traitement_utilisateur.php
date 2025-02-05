@@ -1,5 +1,5 @@
 <?php
-
+session_start();
 
 
 $numeroRue = $_POST['numeroRue'];
@@ -12,10 +12,8 @@ $adresse_complete = $numeroRue." ".$nomRue." ".$cp." ".$ville; ; ;
 $q =urlencode("$numeroRue $nomRue $ville");
 $url_requete = $url_base . $q;
 $reponse = file_get_contents($url_requete);
-if($reponse == false){
-    echo "<h3> Adresse invalide </h3>" ;
-}
-else {
+if($reponse !== false){
+
 
     $data = json_decode($reponse, true);
     $resultat = $data['features'][0]['properties'];
@@ -33,6 +31,10 @@ else {
         echo "<h3> Adresse introuvable </h3>";
     }
 }
+else {
+    echo "Impossible de contacter l'API";
+}
+
 
 
 ?>
