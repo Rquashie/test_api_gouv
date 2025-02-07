@@ -10,7 +10,7 @@
         <tr>
             <td><label for name ="adresse" >Adresse</label>
             <td><input type = "text" name="adresse"></td>
-            <td><select class = "traitement-adresse" name="nom-adresse"></select>
+            <td><select class = "traitement-adresse" name="adresse[]"></select>
             </tr>
         <tr>
             <td><input type = "submit" value = "valider"></td>
@@ -18,15 +18,11 @@
         </tr>
     </table>
 </form>
-<script type="text/javascript">
-    $('.traitement-adresse').select2({
-        ajax: {
-            url: 'https://api-adresse.data.gouv.fr/',
-            dataType: 'json',
-            delay : 250
-            // Additional AJAX parameters go here; see the end of this chapter for the full code of this example
-        }
+<script>
+    $(document).ready(function() {
+        $('traitement-adresse').select2();
     });
-    </script>
+
+</script>
 </body>
 </html>
