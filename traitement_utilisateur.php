@@ -24,8 +24,7 @@ if($reponse !== false){
 
     $similaire_ville = similar_text($adresse_complete, $adresse_api, $pourcentage);
     if ($pourcentage > 92) {
-        echo "<h3> $url_requete </h3>";
-        echo "<h3> Adresse trouvée : $adresse_api </h3>";
+        echo "<h3> Bienvenue </h3>";
 
     } else {
         echo "<h3> Adresse introuvable </h3>";
