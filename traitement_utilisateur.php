@@ -13,8 +13,6 @@ $q =urlencode("$numeroRue $nomRue $ville");
 $url_requete = $url_base . $q;
 $reponse = file_get_contents($url_requete);
 if($reponse !== false){
-
-
     $data = json_decode($reponse, true);
     $resultat = $data['features'][0]['properties'];
 
