@@ -1,1 +1,0 @@
-$('traitement-adresse').select2();

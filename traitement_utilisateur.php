@@ -1,40 +1,23 @@
 <?php
-session_start();
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['ville'])) {
+    $ville = trim($_POST['ville']);
 
-
-$numeroRue = $_POST['numeroRue'];
-$nomRue = $_POST['nomRue'];
-$ville = $_POST['ville'];
-$cp = $_POST['cp'];
-
-$url_base = "https://api-adresse.data.gouv.fr/search/?q=" ;
-$adresse_complete = $numeroRue." ".$nomRue." ".$cp." ".$ville; ; ;
-$q =urlencode("$numeroRue $nomRue $ville");
-$url_requete = $url_base . $q;
-$reponse = file_get_contents($url_requete);
-if($reponse !== false){
+    // Appeler l'API pour chercher les villes 
+    $url = "https://api-adresse.data.gouv.fr/search/?q=" . urlencode($ville);
+    $reponse = file_get_contents($url);
     $data = json_decode($reponse, true);
-    $resultat = $data['features'][0]['properties'];
 
-    $ville_api = $resultat['city'];
-    $adresse_api = $resultat['label'];
+    $resultats = [];
 
-
-    $similaire_ville = similar_text($adresse_complete, $adresse_api, $pourcentage);
-    if ($pourcentage > 92) {
-        echo "<h3> Bienvenue </h3>";
-
-    } else {
-        echo "<h3> Adresse introuvable </h3>";
+    if (isset($data['features'])) {
+        foreach ($data['features'] as $ville) {
+            $resultats[] = [
+                'code' => $ville['properties']['postcode'],
+                'nom'  => $ville['properties']['label']
+            ];
+        }
     }
+
+    echo json_encode(['results' => $resultats]);
 }
-else {
-    echo "Impossible de contacter l'API";
-}
-
-
-
 ?>
-
-
-
