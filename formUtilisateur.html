@@ -13,48 +13,83 @@
 </head>
 <body>
 <form>
-    <label for="select-ville">
-        Selectionnaer une ville
+    <table>
+        <tr>
+            <td><label for="select-ville">Sélectionner une ville</label></td>
+            <td><select class="ville" id="select-ville" style="width:350px">
 
-        <select class="ville" id="select-ville"
-        style="width:350px"></select>
-    </label>
+            </select></td>
+        </tr>
+        <tr>
+            <td><label for="select-adresse">Sélectionner une adresse</label></td>
+            <td><select class="adresse" id="select-adresse" style="width:350px">
 
+            </select></td>
+        </tr>
+    </table>
 </form>
+
 
 
 </body>
 </html>
 <script>
-    $(document).ready(function() {
-        $('#select-ville').select2({
-            placeholder: "Tapez le nom d'une ville...",
-            theme: 'bootstrap4',
-            allowClear: true,
-            minimumInputLength: 2,
-            ajax: {
-                url: 'traitement_utilisateur.php',
-                type: 'POST',
-                dataType: 'json',
-                delay: 250,
-                data: function(params) {
-                    return {
-                        ville: params.term
-                    };
-                },
-                processResults: function(data) {
-                    return {
-                        results: data.results.map(function(item) {
-                            return {
-                                id: item.code,
-                                text: item.nom
-                            };
-                        })
-                    };
-                },
-                cache: true
-            }
-        });
+    $('#select-ville').select2({
+        theme: 'bootstrap4',
+        allowClear: true,
+        minimumInputLength: 1,
+        ajax: {
+            url: 'traitement_ville.php',
+            type: 'POST',
+            dataType: 'json',
+            delay: 200,
+            data: function(params) {
+                return {
+                    ville: params.term
+                };
+            },
+            processResults: function(data) {
+                return {
+                    results: data.results.map(function(item) {
+                        return {
+                            id: item.code,
+                            text: item.nom
+                        };
+                    })
+                };
+            },
+            cache: true
+        }
     });
+
+    $('#select-adresse').select2({
+        theme: 'bootstrap4',
+        allowClear: true,
+        minimumInputLength: 1,
+        ajax: {
+            url: 'traitement_adresse.php',
+            type: 'POST',
+            dataType: 'json',
+            delay: 200,
+            data: function(params) {
+                return {
+                    adresse: params.term
+                };
+            },
+            processResults: function(data) {
+                return {
+                    results: data.results.map(function(item) {
+                        return {
+                            id: item.code,
+                            text: item.nom
+                        };
+                    })
+                };
+            },
+            cache: true
+        }
+    });
+
+
 </script>
 
